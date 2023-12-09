@@ -25,7 +25,7 @@ print(torch.cuda.is_available())
 ### Detecting streamed video
 # python detect.py --weights runs/train/yv7-ct16/weights/best.pt --conf 0.25 --img-size 320 --source 1
 
-# python detect.py --weights runs/train/yv7-ct16/weights/best.pt --conf 0.25 --img-size 320 --source 1 --iou-thres 0.35
+# python detect.py --weights runs/train/yv7-ct15/weights/best.pt --conf 0.25 --img-size 320 --source 1 --iou-thres 0.35
 
 ### Detecting image
 # python detect.py --weights runs/train/yv7-ct16/weights/best.pt --conf 0.25 --img-size 320 --source inference/images/chess/examplechess.jpg

@@ -194,3 +194,6 @@ if __name__ == '__main__':
                 strip_optimizer(opt.weights)
         else:
             detect()
+
+
+# python detect.py --weights runs/train/yv7-ct15/weights/best.pt --conf 0.25 --img-size 320 --source 0 --iou-thres 0.35

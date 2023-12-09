@@ -20,6 +20,8 @@ import torch
 import cv2
 import numpy as np
 
+height = 640
+width = 480
 
 def detect(save_img=False):
 	source, weights, view_img, save_txt, imgsz, trace = opt.source, opt.weights, opt.view_img, opt.save_txt, opt.img_size, not opt.no_trace
@@ -81,11 +83,9 @@ def detect(save_img=False):
 
 
 	while(True):
+        #t0 = time.time()
 
-		# Warm up the camera to get coherent frames
-		print("Waiting for frames")
 		frames = pipeline.wait_for_frames()
-		print("Warmed up!")
 
 		aligned_frames = align.process(frames)
 		color_frame = aligned_frames.get_color_frame()
@@ -166,18 +166,16 @@ def detect(save_img=False):
 			# print(f'{s}Done. ({(1E3 * (t2 - t1)):.1f}ms) Inference, ({(1E3 * (t3 - t2)):.1f}ms) NMS')
 
 		# Stream results
-		if view_img:
-			# cv2.imshow(str(p), im0)
-			cv2.imshow("Recognition result", im0)
-			cv2.imshow("Recognition result depth", depth_colormap)
-			if cv2.waitKey(1) & 0xFF == ord('q'):
-				break  # 1 millisecond
+		cv2.imshow("Recognition result", im0)
+		cv2.imshow("Recognition result depth", depth_colormap)
+		if cv2.waitKey(1) & 0xFF == ord('q'):
+			break  # 1 millisecond
 
 
 
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser()
-	parser.add_argument('--weights', nargs='+', type=str, default='runs/train/yv7-rs/weights/best.pt', help='model.pt path(s)')
+	parser.add_argument('--weights', nargs='+', type=str, default='runs/train/yv7-ct15/weights/best.pt', help='model.pt path(s)')
 	parser.add_argument('--source', type=str, default='inference/images', help='source')  # file/folder, 0 for webcam
 	parser.add_argument('--img-size', type=int, default=320, help='inference size (pixels)')
 	parser.add_argument('--conf-thres', type=float, default=0.25, help='object confidence threshold')

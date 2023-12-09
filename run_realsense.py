@@ -62,8 +62,8 @@ import cv2
 # Configure depth and color streams
 pipeline = rs.pipeline()
 config = rs.config()
-config.enable_stream(rs.stream.depth, 848, 480, rs.format.z16, 30)
-config.enable_stream(rs.stream.color, 640, 360, rs.format.bgr8, 30)
+config.enable_stream(rs.stream.depth, 640, 480, rs.format.z16, 30)
+config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 30)
 
 # Start streaming
 profile = pipeline.start(config)
@@ -103,17 +103,22 @@ try:
         depth_image = np.asanyarray(depth_frame.get_data())
         depth_colormap = cv2.applyColorMap(cv2.convertScaleAbs(depth_image, alpha=0.08), cv2.COLORMAP_JET)
 
-        # Stack both images horizontally
-        images = np.hstack((color_image, depth_colormap))
-
         # Resize with padding
-        images_padded = resize_with_padding(images)
+        color_image_padded = resize_with_padding(color_image)
+        depth_colormap_padded = resize_with_padding(depth_colormap)
 
-        # Show images
-        cv2.namedWindow('RealSense', cv2.WINDOW_AUTOSIZE)
-        cv2.imshow('RealSense', images_padded)
-        cv2.waitKey(1)
+        # Show images in separate windows
+        cv2.namedWindow('RealSense Color', cv2.WINDOW_AUTOSIZE)
+        cv2.namedWindow('RealSense Depth', cv2.WINDOW_AUTOSIZE)
+        cv2.imshow('RealSense Color', color_image_padded)
+        cv2.imshow('RealSense Depth', depth_colormap_padded)
+
+        # Break the loop when 'q' is pressed
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
 
 finally:
     # Stop streaming
     pipeline.stop()
+    cv2.destroyAllWindows()
+
