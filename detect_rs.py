@@ -62,11 +62,6 @@ def detect(save_img=False):
 	old_img_w = old_img_h = imgsz
 	old_img_b = 1
 
-	print(f"old_img_w: {old_img_w}")
-	print(f"old_img_h: {old_img_h}")
-	print(f"old_img_b: {old_img_b}")
-
-
 
 	####### Realsense Start ########    
 	config = rs.config()

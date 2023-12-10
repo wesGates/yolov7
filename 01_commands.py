@@ -16,7 +16,13 @@ print(torch.cuda.is_available())
 #   python train.py --workers 8 --device 0 --batch-size 8 --data data/chess.yaml --img 320 320 --cfg cfg/training/yolov7-chess.yaml --weights 'yolov7_training.pt' --name yv7-ct1 --hyp data/hyp.scratch.custom.yaml --epochs 8
 
 # Training v3: Alter resolution to match the streamed resolution of the IntelRealsense D435 camera
-#   python train.py --workers 8 --device 0 --batch-size 8 --data data/chess.yaml --img 320 240 --cfg cfg/training/yolov7-chess.yaml --weights 'yolov7_training.pt' --name yv7-ct1 --hyp data/hyp.scratch.custom.yaml --epochs 100
+#   python train.py --workers 8 --device 0 --batch-size 8 --data data/chess.yaml --img 320 240 --cfg cfg/training/yolov7-chess.yaml --weights 'yolov7_training.pt' --name yv7-rs --hyp data/hyp.scratch.custom.yaml --epochs 100
+
+# Training v4: Alter resolution to be square!!!
+#   python train.py --workers 8 --device 0 --batch-size 8 --data data/chess.yaml --img 320 320 --cfg cfg/training/yolov7-chess.yaml --weights 'yolov7_training.pt' --name yv7-rs1 --hyp data/hyp.scratch.custom.yaml --epochs 300
+
+# Training v5: Lower epochs for better performance evaluation
+# python train.py --workers 8 --device 0 --batch-size 8 --data data/chess.yaml --img 320 320 --cfg cfg/training/yolov7-chess.yaml --weights 'yolov7_training.pt' --name yv7-rs1 --hyp data/hyp.scratch.custom.yaml --epochs 300
 
 
 ### Detection and Inference Commands
